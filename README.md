@@ -4,7 +4,7 @@ This is a simple addon, that will launch a WebSocket server, recieves/sends data
 
 ## Installation
 - copy "example/@arma-ws" directory to your ARMA root, then add "@arma-ws" to the "-mod" launch parameter
-- include (or modify) the content of the "example/sqf" directory
+- include (and/or modify) the content of the "example/sqf" directory in your mission
 
 check if it's working: launch the "example/html/arma-ws.html" and you can see your player's coordinates at live
 
