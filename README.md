@@ -19,6 +19,10 @@ This is my first external lib for ARMA and I think it's fun to connect ARMA to t
 
 use the attached solution files (currently working only on Windows, compiled with VS2015)
 
+## Known errors
+
+- crashes when the game is paused (use -noPause and Alt+Tab NOT Esc)
+
 ## Thanks to
 
 - the developers of "boost"
