@@ -1,6 +1,6 @@
 ## arma-ws v0.1
 
-This is a simple addon, that will launch a WebSocket server, recieves/sends data from users to the ARMA engine.
+This is a simple addon, that will launch a WebSocket server, recieves/sends data between an external WS app and the ARMA engine.
 
 ## Installation
 - copy "example/@arma-ws" directory to your ARMA root, then add "@arma-ws" to the "-mod" launch parameter
