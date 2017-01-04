@@ -19,6 +19,13 @@ This is my first external lib for ARMA and I think it's fun to connect ARMA to t
 
 use the attached solution files (currently working only on Windows, compiled with VS2015)
 
+## Thanks to
+
+- the developers of "boost"
+- the developer of "websocketpp"
+- AsYetUnited for the source of extDB2 (https://github.com/AsYetUntitled/extDB2)
+- killzonekid fot the beautiful tutorials (http://killzonekid.com)
+
 ## License
 
 Use, modify at your will, just please mention me at the end of your README :)
