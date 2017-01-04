@@ -1,0 +1,2 @@
+[INFO] Config file found: N:\prog\C++\prog\vc2015\arma3\arma-ws\Debug\arma-ws.ini
+[INFO] Server is running.
