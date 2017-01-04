@@ -30,7 +30,7 @@ public:
 	DebugConsole(bool enabled);
 	~DebugConsole(void);
 
-	void write(std::string msg);
+	void write(std::string msg, unsigned char foregroundColor = WHITE, unsigned char backgroundColor = BLACK);
 
 private:
 	bool _enabled;

@@ -16,14 +16,13 @@ Extension::Extension(std::string path)
 		_log->write("Config file found: " + ini_path.string());
 	}
 	else {
-		_log->write("WARNING: 'arma-ws.ini' was not found! using default values.");
+		_log->warning("'arma-ws.ini' was not found! using default values");
 
 		int _port = 9002;
 		bool _debugConsole = true;
 	}
 
 	_log->setDebugConsole(_debugConsole);
-
 
 	try {
 		_srv = new WebSocketServer(_arma_actions_do, _arma_actions_done);
@@ -35,9 +34,9 @@ Extension::Extension(std::string path)
 		_threads.create_thread(boost::bind(&WebSocketServer::answer_clients, _srv));
 
 	} catch (websocketpp::exception const & ex) {
-		_log->write("ERROR: " + ex.m_msg);
+		_log->error(ex.what());
 	} catch (const std::exception& ex) {
-		_log->write(ex.what());
+		_log->error(ex.what());
 	}
 
 	_log->write("Server is running.");
@@ -45,7 +44,7 @@ Extension::Extension(std::string path)
 
 Extension::~Extension()
 {
-
+	/* TODO: something */
 }
 
 void 
@@ -71,6 +70,9 @@ Extension::callExtension(char *output, const int &output_size, const char *funct
 		tokens.push_back(*beg);
 	}
 
+	/* ping 
+	   ?:
+	*/
 	if (tokens.size() == 1) {
 		if (tokens[0] == "?") {
 			if (_arma_actions_do.empty()) {
@@ -95,6 +97,9 @@ Extension::callExtension(char *output, const int &output_size, const char *funct
 			std::strcpy(output, "nothing");
 		}
 	}
+	/* result of the code 
+	   !:ID:TYPE:VALUE
+	*/
 	else if (tokens.size() == 4) {
 		if (tokens[0] == "!") {
 			unsigned int id = boost::lexical_cast<unsigned int>(tokens[1]);

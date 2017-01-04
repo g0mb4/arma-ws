@@ -1,4 +1,4 @@
-## arma-ws v0.1
+## arma-ws v0.2
 
 This is a simple addon, that will launch a WebSocket server, recieves/sends data between an external WS app and the ARMA engine.
 

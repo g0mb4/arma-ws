@@ -30,6 +30,7 @@ void
 Logger::write(std::string msg)
 {
 	_file << "[INFO] " << msg << "\n";
+	_file.flush();
 
 	_con->write("[INFO] " + msg + "\n\r");
 }
@@ -38,14 +39,16 @@ void
 Logger::warning(std::string msg)
 {
 	_file << "[WARNING] " << msg << "\n";
+	_file.flush();
 
-	_con->write("[WARNING] " + msg + "\n\r");
+	_con->write("[WARNING] " + msg + "\n\r", YELLOW, BLACK);
 }
 
 void 
 Logger::error(std::string msg)
 {
 	_file << "[ERROR] " << msg << "\n";
+	_file.flush();
 
-	_con->write("[ERROR] " + msg + "\n\r");
+	_con->write("[ERROR] " + msg + "\n\r", RED, BLACK);
 }

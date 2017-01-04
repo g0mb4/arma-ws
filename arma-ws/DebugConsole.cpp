@@ -11,9 +11,7 @@ DebugConsole::DebugConsole(bool enabled)
 		freopen_s(&stream, "CON", "w", stdout);
 		SetConsoleTitle("Debug Console for ARMA-WebSocket");
 
-		setColor(YELLOW, BLUE);
-		write(" Debug Console for ARMA-WebSocket by gmb\n\n");
-		setColor(WHITE, BLACK);
+		write(" Debug Console for ARMA-WebSocket by gmb\n\n", YELLOW, BLUE);
 	}
 }
 
@@ -29,10 +27,10 @@ DebugConsole::~DebugConsole(void)
 }
 
 void 
-DebugConsole::write(std::string msg)
+DebugConsole::write(std::string msg, unsigned char foregroundColor, unsigned char backgroundColor)
 {
 	if (_enabled) {
-		setColor(WHITE, BLACK);
+		setColor(foregroundColor, backgroundColor);
 		std::cout << msg;
 	}
 }

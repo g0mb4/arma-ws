@@ -32,6 +32,7 @@ WebSocketServer::run(uint16_t port)
 	}
 	catch (const std::exception & e) {
 		throw e;
+		/* TODO : make it nicer */
 	}
 }
 
@@ -72,14 +73,11 @@ WebSocketServer::answer_clients(void)
 				action a = _arma_actions_done.front();
 				_arma_actions_done.pop();
 
-				/*
-				connection_ptr a_ptr = _server.get_con_from_hdl(a.hdl);
-				std::cout << "A" << "  " << a_ptr->get_raw_socket().remote_endpoint().address() << std::endl;
-				std::cout << "SENT : " << a.msg_str << std::endl;
-				*/
 				_server.send(a.hdl, a.msg_str, websocketpp::frame::opcode::text);
 			}
-			catch (...) { }
+			catch (...) { 
+				/* TODO : make it nicer */
+			}
 		}
 	}
 }
@@ -110,30 +108,12 @@ WebSocketServer::process_messages(void)
 		else if (a.type == MESSAGE) {
 			unique_lock<mutex> con_lock(_connection_lock);
 			con_list::iterator it;
-			//std::queue<action> foo = _arma_actions_done;
 			bool found = false;
 
 			int i = 0;
 			for(it = _connections.begin(); it != _connections.end(); ++it) {
 
-				/*
-				connection_ptr it_ptr = _server.get_con_from_hdl(*it);
-				std::cout << "IT" << i << "  " << it_ptr->get_raw_socket().remote_endpoint().address() << std::endl;
-
-				int j = 0;
-				while (!foo.empty()) {
-					action f = foo.front();
-					foo.pop();
-
-					connection_ptr f_ptr = _server.get_con_from_hdl(f.hdl);
-
-					std::cout << "F" << j << "  " << f_ptr->get_raw_socket().remote_endpoint().address() << std::endl;
-					j++;
-				}
-
-				if(!found)
-				*/
-
+				/* TODO : prevent client to set up an action if another action of his is in the queue */
 				_arma_actions_do.push(a);
 			}
 		}
