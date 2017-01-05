@@ -76,6 +76,8 @@ private:
 	mutex _action_lock;
 	mutex _connection_lock;
 	condition_variable _action_cond;
+
+	void _handle_server_messages(action a);
 };
 
 #endif

@@ -106,19 +106,42 @@ WebSocketServer::process_messages(void)
 			_connections.erase(a.hdl);
 		}
 		else if (a.type == MESSAGE) {
-			unique_lock<mutex> con_lock(_connection_lock);
-			con_list::iterator it;
-			bool found = false;
 
-			int i = 0;
-			for(it = _connections.begin(); it != _connections.end(); ++it) {
-
-				/* TODO : prevent client to set up an action if another action of his is in the queue */
+			/* messages to the server
+			  #:servercommand
+			*/
+			if (a.msg->get_payload().at(0) == '#') {
+				_handle_server_messages(a);
+			} else {
+				/* TODO : prevent client to set up an action if another action of his is in the queue
+				WHYNOT: every client waits for the response, can't send new */
 				_arma_actions_do.push(a);
 			}
+
 		}
 		else {
 			// undefined.
 		}
+	}
+}
+
+void 
+WebSocketServer::_handle_server_messages(action a)
+{
+	std::string answer;
+
+	if (a.msg->get_payload() == "#:version") {
+		answer = "0.2";
+	}
+	else {
+		answer = "unknown";
+	}
+
+
+	try {
+		_server.send(a.hdl, answer, websocketpp::frame::opcode::text);
+	}
+	catch (...) {
+		/* TODO : make it nicer */
 	}
 }

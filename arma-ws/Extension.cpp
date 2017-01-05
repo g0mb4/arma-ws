@@ -98,7 +98,7 @@ Extension::callExtension(char *output, const int &output_size, const char *funct
 		}
 	}
 	/* result of the code 
-	   !:ID:TYPE:VALUE
+	   !:MESSAGE_ID:RETRUN_TYPE:VALUE
 	*/
 	else if (tokens.size() == 4) {
 		if (tokens[0] == "!") {

@@ -2,29 +2,30 @@ private ["_command"];
 
 while { true } do 
 {
+	// ping the server if there is any command in the queue
 	_command = "arma-ws" callExtension ("?:");
 
+	// if there is any command to execute
 	if( _command != "nothing" && _command != "" ) then
 	{
+		// disassemble the message
 		_commandStr = _command splitString ":";
 
-		//diag_log format["[AWS] CMD: %1", _command];
-
+		// get the ID of te message, need for the server
 		_id = _commandStr select 0;
+		// get the command
 		_code = _commandStr select 1;
 
+		// execute the command
 		_result = [] call compile _code;
 
-		//diag_log format["[AWS] RESULT: %1", _result];
-
+		// get teh type of the result
 		_type = typeName _result;
 
-		//diag_log format["[AWS] TYPE: %1", _type];
-
+		// assemble the message
 		_response = ["!", _id, _type, _result ] joinString ":";
 
-		//diag_log format["[AWS] RESPONSE: %1", _response];
-
+		// send back the result
 		_command = "arma-ws" callExtension (_response);
 	};
 
