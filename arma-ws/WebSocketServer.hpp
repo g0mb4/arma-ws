@@ -8,6 +8,9 @@
 	#pragma warning(disable:4996)
 #endif
 
+#define VERSION_MAJOR 0
+#define VERSION_MINOR 4
+
 #include <websocketpp/config/asio_no_tls.hpp>
 #include <websocketpp/server.hpp>
 
@@ -30,9 +33,14 @@ using websocketpp::lib::unique_lock;
 using websocketpp::lib::condition_variable;
 
 enum action_type {
-	SUBSCRIBE,
-	UNSUBSCRIBE,
+	CONNECT,
+	DISCONNECT,
 	MESSAGE
+};
+
+enum server_mode {
+	COMMAND,
+	BROADCAST
 };
 
 struct action {
@@ -51,7 +59,7 @@ struct action {
 class WebSocketServer {
 
 public:
-	WebSocketServer(std::queue<action>& _arma_actions_do, std::queue<action>& _arma_actions_done);
+	WebSocketServer(int mode, std::queue<action>& _arma_actions_do, std::queue<action>& _arma_actions_done);
 	~WebSocketServer(void);
 
 	void run(uint16_t port);
@@ -70,6 +78,8 @@ private:
 	server _server;
 	con_list _connections;
 
+	int _mode;
+
 	std::queue<action> _server_actions;
 	std::queue<action> &_arma_actions_do;
 	std::queue<action> &_arma_actions_done;
@@ -78,6 +88,7 @@ private:
 	condition_variable _action_cond;
 
 	void _handle_server_messages(action a);
+
 };
 
 #endif

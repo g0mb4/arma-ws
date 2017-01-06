@@ -1,8 +1,10 @@
 #include "WebSocketServer.hpp"
 
-WebSocketServer::WebSocketServer(std::queue<action>& arma_actions_do, std::queue<action>& arma_actions_done)
+WebSocketServer::WebSocketServer(int mode, std::queue<action>& arma_actions_do, std::queue<action>& arma_actions_done)
 	: _arma_actions_do(arma_actions_do), _arma_actions_done(arma_actions_done)
 {
+	_mode = mode;
+
 	_server.clear_access_channels(websocketpp::log::alevel::all);
 	_server.clear_access_channels(websocketpp::log::elevel::all);
 	_server.set_access_channels(websocketpp::log::elevel::rerror | websocketpp::log::elevel::fatal);
@@ -40,7 +42,7 @@ void
 WebSocketServer::on_open(connection_hdl hdl)
 {
 	unique_lock<mutex> lock(_action_lock);
-	_server_actions.push(action(SUBSCRIBE, hdl));
+	_server_actions.push(action(CONNECT, hdl));
 	lock.unlock();
 	_action_cond.notify_one();
 }
@@ -49,7 +51,7 @@ void
 WebSocketServer::on_close(connection_hdl hdl)
 {
 	unique_lock<mutex> lock(_action_lock);
-	_server_actions.push(action(UNSUBSCRIBE, hdl));
+	_server_actions.push(action(DISCONNECT, hdl));
 	lock.unlock();
 	_action_cond.notify_one();
 }
@@ -73,7 +75,17 @@ WebSocketServer::answer_clients(void)
 				action a = _arma_actions_done.front();
 				_arma_actions_done.pop();
 
-				_server.send(a.hdl, a.msg_str, websocketpp::frame::opcode::text);
+				if (_mode == COMMAND) {
+					_server.send(a.hdl, a.msg_str, websocketpp::frame::opcode::text);
+				} else if (_mode == BROADCAST) {
+					unique_lock<mutex> con_lock(_connection_lock);
+
+					con_list::iterator it;
+					for (it = _connections.begin(); it != _connections.end(); ++it) {
+						_server.send(*it, a.msg_str, websocketpp::frame::opcode::text);
+					}
+					con_lock.unlock();
+				}
 			}
 			catch (...) { 
 				/* TODO : make it nicer */
@@ -97,27 +109,26 @@ WebSocketServer::process_messages(void)
 
 		lock.unlock();
 
-		if (a.type == SUBSCRIBE) {
+		if (a.type == CONNECT) {
 			unique_lock<mutex> con_lock(_connection_lock);
 			_connections.insert(a.hdl);
+			con_lock.unlock();
 		}
-		else if (a.type == UNSUBSCRIBE) {
+		else if (a.type == DISCONNECT) {
 			unique_lock<mutex> con_lock(_connection_lock);
 			_connections.erase(a.hdl);
+			con_lock.unlock();
 		}
 		else if (a.type == MESSAGE) {
-
-			/* messages to the server
-			  #:servercommand
-			*/
 			if (a.msg->get_payload().at(0) == '#') {
 				_handle_server_messages(a);
 			} else {
 				/* TODO : prevent client to set up an action if another action of his is in the queue
 				WHYNOT: every client waits for the response, can't send new */
-				_arma_actions_do.push(a);
+				if (_mode == COMMAND) {
+					_arma_actions_do.push(a);
+				}
 			}
-
 		}
 		else {
 			// undefined.
@@ -130,13 +141,14 @@ WebSocketServer::_handle_server_messages(action a)
 {
 	std::string answer;
 
-	if (a.msg->get_payload() == "#:version") {
-		answer = "0.2";
+	if(a.msg->get_payload() == "#:version") {
+		answer = VERSION_MAJOR + "." + VERSION_MINOR;
 	}
-	else {
+	else if(a.msg->get_payload() == "#:mode") {
+		answer = _mode;
+	} else	{
 		answer = "unknown";
 	}
-
 
 	try {
 		_server.send(a.hdl, answer, websocketpp::frame::opcode::text);

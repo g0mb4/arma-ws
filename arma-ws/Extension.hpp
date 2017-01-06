@@ -4,6 +4,7 @@
 #pragma warning(disable:4996)
 
 #include <string>
+#include <fstream>
 
 #include <boost/algorithm/string.hpp>
 #include <boost/filesystem.hpp>
@@ -44,6 +45,9 @@ private:
 	//settings
 	int _port;
 	bool _debugConsole;
+	int _mode;
+	std::string _sqfFileName;
+	std::string _code;
 };
 
 #endif
