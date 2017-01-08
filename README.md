@@ -40,9 +40,54 @@ This is my first external lib for ARMA and I think it's fun to connect ARMA to t
 ## Compilation
 
 - get "boost" (http://www.boost.org/users/history/version_1_63_0.html)
+
+set BOOST_ROOT enviromental variable
+e.g.:
+```
+Windows:
+set BOOST_ROOT=n:\prog\C++\prog\boost_1_63_0
+
+Linux:
+export BOOST_ROOT=/home/gmb/prog/c++/boost_1_63_0
+```
+set BOOST_LIBRARYDIR enviromental variable
+e.g.:
+```
+Windows:
+set BOOST_LIBRARYDIR=n:\prog\C++\prog\boost_1_63_0\lib32-msvc-14.0
+
+Linux:
+export BOOST_LIBRARYDIR=/home/gmb/prog/c++/boost_1_63_0/stage/lib
+```
+
 - get "websocketpp" (https://github.com/zaphoyd/websocketpp)
 
-use the attached solution files (currently working only on Windows, compiled with VS2015)
+set WEBSOCKETPP_ROOT enviromental variable
+e.g.:
+```
+Windows:
+set WEBSOCKETPP_ROOT=n:\prog\C++\prog\websocketpp
+
+Linux:
+export WEBSOCKETPP_ROOT=/home/gmb/prog/c++/websocketpp
+```
+
+in linux (bash) type (I'll work on it:
+```
+alias g++="g++ --std=c++0x"
+```
+
+then
+```
+cd build
+cmake ..
+
+Windows:
+open the generated arma-ws.sln
+
+Linux:
+make
+```
 
 ## Known errors
 
@@ -53,7 +98,7 @@ use the attached solution files (currently working only on Windows, compiled wit
 - the developers of boost (http://www.boost.org)
 - zaphoyd for the source of websocketpp (https://github.com/zaphoyd/websocketpp)
 - AsYetUnited for the source of extDB2 (https://github.com/AsYetUntitled/extDB2)
-- killzonekid fot the beautiful tutorials (http://killzonekid.com)
+- killzonekid for the beautiful tutorials (http://killzonekid.com)
 
 ## License
 

@@ -1,7 +1,10 @@
 #ifndef __WSSERVER_HPP__
 #define __WSSERVER_HPP__
 
-#ifdef _MSC_VER
+#ifdef __GNUC__
+	#define _WEBSOCKETPP_CPP11_STL_
+	#define _WEBSOCKETPP_NO_CPP11_REGEX_
+#elif _MSC_VER
 	#define _WEBSOCKETPP_NOEXCEPT_
 	#define _WEBSOCKETPP_CPP11_CHRONO_
 	#define BOOST_ASIO_DISABLE_STD_CHRONO

@@ -1,7 +1,0 @@
-[INFO] Config file found: N:\prog\C++\prog\vc2015\arma3\arma-ws\example\@arma-ws\arma-ws.ini
-[INFO] Code loaded from N:\prog\C++\prog\vc2015\arma3\arma-ws\example\@arma-ws\pos.sqf
-[INFO] Port: 9002
-[INFO] Mode: 1
-[INFO] Code: pos.sqf
-[INFO] Server is running.
-[INFO] Server stopped.
