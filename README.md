@@ -7,27 +7,28 @@ This mod is basically a .DLL/.SO file.
 ## Modes
 
 - COMMAND (different commands for clients):
-	1. client sends commands to the server
-	2. ARMA gets the commands from the server
-	3. ARMA executes the commands
-	4. ARMA sends the result back to the server
-	5. server sends the result to the client
-	6. goto 1.
+ 1. client sends commands to the server
+ 2. ARMA gets the commands from the server
+ 3. ARMA executes the commands
+ 4. ARMA sends the result back to the server
+ 5. server sends the result to the client
+ 6. goto 1.
 
 - BROADCAST (same commands for all clients):
-	1. server reads the commands at the start
-	2. ARMA gets the commands from the server
-	3. ARMA executes the commands
-	4. ARMA sends the result back to the server
-	5. server sends the result to all clients
-	6. goto 3.
+ 1. server reads the commands at the start
+ 2. ARMA gets the commands from the server
+ 3. ARMA executes the commands
+ 4. ARMA sends the result back to the server
+ 5. server sends the result to all clients
+ 6. goto 3.
 
 ## Installation
 
 - copy "example/@arma-ws" directory to your ARMA root, then add "@arma-ws" to the "-mod" launch parameter
 - include (and/or modify) the content of the "example/sqf/<mode>" directory in your mission
 
-check if it's working: launch the "example/html/<mode>/arma-ws.html" and you can see your player's coordinates at live
+check if it's working:
+- launch the "example/html/<mode>/arma-ws.html" and you can see your player's coordinates at live
 
 ## Configuration
 
@@ -72,7 +73,7 @@ Linux:
 export WEBSOCKETPP_ROOT=/home/gmb/prog/c++/websocketpp
 ```
 
-in linux (bash) type (I'll work on it:
+in linux (bash) type (I'll work on it):
 ```
 alias g++="g++ --std=c++0x"
 ```
