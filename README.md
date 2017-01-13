@@ -2,7 +2,7 @@
 
 This is a simple addon, that will launch a WebSocket server, recieves/sends data between an external WS app and the ARMA engine.
 
-This mod is basically a .DLL file.
+This mod is basically a .DLL/.SO file.
 
 ## Modes
 
@@ -12,7 +12,7 @@ This mod is basically a .DLL file.
 	3. ARMA executes the commands
 	4. ARMA sends the result back to the server
 	5. server sends the result to the client
-	6. goto 1
+	6. goto 1.
 
 - BROADCAST (same commands for all clients):
 	1. server reads the commands at the start
@@ -20,7 +20,7 @@ This mod is basically a .DLL file.
 	3. ARMA executes the commands
 	4. ARMA sends the result back to the server
 	5. server sends the result to all clients
-	6. goto 3
+	6. goto 3.
 
 ## Installation
 
