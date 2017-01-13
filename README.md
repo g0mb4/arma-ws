@@ -40,7 +40,7 @@ This is my first external lib for ARMA and I think it's fun to connect ARMA to t
 
 ## Compilation
 
-- get "boost" (http://www.boost.org/users/history/version_1_63_0.html)
+### get "boost" (http://www.boost.org/users/history/version_1_63_0.html)
 
 set BOOST_ROOT enviromental variable
 e.g.:
@@ -61,7 +61,7 @@ Linux:
 export BOOST_LIBRARYDIR=/home/gmb/prog/c++/boost_1_63_0/stage/lib
 ```
 
-- get "websocketpp" (https://github.com/zaphoyd/websocketpp)
+### get "websocketpp" (https://github.com/zaphoyd/websocketpp)
 
 set WEBSOCKETPP_ROOT enviromental variable
 e.g.:
@@ -78,7 +78,7 @@ in linux (bash) type (I'll work on it):
 alias g++="g++ --std=c++0x"
 ```
 
-then
+### Compile
 ```
 cd build
 cmake ..
