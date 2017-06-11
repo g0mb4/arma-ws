@@ -6,7 +6,7 @@ This mod is basically a .DLL/.SO file.
 
 ## Modes
 
-###COMMAND (different commands for clients):
+### COMMAND (different commands for clients):
 1.  client sends commands to the server
 2.  ARMA gets the commands from the server
 3.  ARMA executes the commands
@@ -14,7 +14,7 @@ This mod is basically a .DLL/.SO file.
 5.  server sends the result to the client
 6.  goto 1.
 
-###BROADCAST (same commands for all clients):
+### BROADCAST (same commands for all clients):
 1.  server reads the commands at the start
 2.  ARMA gets the commands from the server
 3.  ARMA executes the commands
