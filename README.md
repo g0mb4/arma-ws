@@ -73,7 +73,7 @@ Linux:
 export WEBSOCKETPP_ROOT=/home/gmb/prog/c++/websocketpp
 ```
 
-in linux (bash) type (I'll work on it):
+in linux (bash) type:
 ```
 alias g++="g++ --std=c++0x"
 ```
