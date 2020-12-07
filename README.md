@@ -25,10 +25,10 @@ This mod is basically a .DLL/.SO file.
 ## Installation
 
 - copy "example/@arma-ws" directory to your ARMA root, then add "@arma-ws" to the "-mod" launch parameter
-- include (and/or modify) the content of the "example/sqf/<mode>" directory in your mission
+- include (and/or modify) the content of the "example/sqf/*mode*" directory in your mission
 
 check if it's working:
-- launch the "example/html/<mode>/arma-ws.html" and you can see your player's coordinates at live
+- launch the "example/html/*mode*/arma-ws.html" and you can see your player's coordinates at live
 
 ## Configuration
 
